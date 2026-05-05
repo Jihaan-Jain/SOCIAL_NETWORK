@@ -21,7 +21,7 @@ public class SocialNetwork {
             chatMessages.put(user, new ArrayList<>());
             System.out.println("✅ User " + user + " added with bio: " + bio);
         } else {
-            System.out.println("⚠️ User already exists!");
+            System.out.println("⚠️ User already exists!"); // Prevent duplicate users
         }
     }
 
