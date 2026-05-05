@@ -16,10 +16,10 @@ public class SocialNetwork {
     // Add a new user
     public void addUser(String user, String bio) {
         if (!friends.containsKey(user)) {
-            friends.put(user, new HashSet<>()); //hello
+            friends.put(user, new HashSet<>()); 
             bios.put(user, bio);
             chatMessages.put(user, new ArrayList<>());
-            System.out.println("✅ User " + user + " added with bio: " + bio);
+            System.out.println("✅ User " + user + " added with bio: " + bio); //helloejdhclieu
         } else {
             System.out.println("⚠️ User already exists!"); // Prevent duplicate users
         }
