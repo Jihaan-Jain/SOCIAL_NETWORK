@@ -10,8 +10,8 @@ public class a {
         JLabel l2 = new JLabel("Password:"); //sfhliuefhwusfhw
 
         JTextField t1 = new JTextField();
-        JPasswordField t2 = new JPasswordField();
-
+        JPasswordField t2 = new JPasswordField();  //fjheiuf
+ 
         JButton b = new JButton("Login");
 
         l1.setBounds(50,50,100,30);
