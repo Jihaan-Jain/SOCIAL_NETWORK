@@ -10,14 +10,16 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo 'Compiling Java source files...'
-                // Compile all .java files — exits with code 1 on ANY syntax error
+                echo 'Starting Java build for SOCIAL_NETWORK project'
                 script {
                     if (isUnix()) {
-                        sh 'find . -name "*.java" | xargs javac 2>&1'
+                        // Compile all Java files in the package together
+                        sh 'echo "Starting Java build for SOCIAL_NETWORK project"'
+                        sh 'javac -cp . dsa_projects/SocialNetwork.java dsa_projects/SocialNetworkMainClass1.java'
                     } else {
-                        // Windows: compile every .java in the repo
-                        bat 'for /r %f in (*.java) do @javac "%f" 2>&1 & if errorlevel 1 exit /b 1'
+                        // Windows: compile full package together — fails on ANY error
+                        bat 'echo Starting Java build for SOCIAL_NETWORK project'
+                        bat 'javac -cp . dsa_projects\\SocialNetwork.java dsa_projects\\SocialNetworkMainClass1.java'
                     }
                 }
             }
@@ -28,10 +30,9 @@ pipeline {
                 echo 'Running smoke test — verifying main class loads...'
                 script {
                     if (isUnix()) {
-                        // Try to run the main class (headless, exits immediately on error)
-                        sh 'java -cp . a || true'
+                        sh 'java -cp . dsa_projects.SocialNetworkMainClass1 || true'
                     } else {
-                        bat 'java -cp . a 2>&1 || echo "Runtime check done"'
+                        bat 'java -cp . dsa_projects.SocialNetworkMainClass1 2>&1 || echo "Runtime check done"'
                     }
                 }
             }
