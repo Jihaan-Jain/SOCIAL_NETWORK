@@ -1,13 +1,13 @@
 package dsa_projects;
 
-// import java.util.*;  // INTENTIONAL ERROR: triggers javac FAILURE in TRACE
+import java.util.*;
 
 public class SocialNetwork {
     private Map<String, Set<String>> friends;
     private Map<String, String> bios;
     private Map<String, List<String>> chatMessages;
 
-    public SocialNetwork() {
+    
         this.friends = new HashMap<>();
         this.bios = new HashMap<>();
         this.chatMessages = new HashMap<>();
