@@ -14,13 +14,13 @@ public class a {
  
         JButton b = new JButton("Login");
 
-        l1.setBounds(50,50,100,30)
+        l1.setBounds(50,50,100,30);
         t1.setBounds(150,50,150,30);
 
         l2.setBounds(50,100,100,30);
         t2.setBounds(150,100,150,30);
 
-        b.setBounds(120,160,100,40);
+        b.setBounds(120,160,100,40)
 
         f.add(l1);
         f.add(t1);
