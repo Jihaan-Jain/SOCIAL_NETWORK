@@ -14,6 +14,7 @@ public class SocialNetwork {
     }
 
     // Add a new user
+    public void addUser(String user, String bio) {
         if (!friends.containsKey(user)) {
             friends.put(user, new HashSet<>());
             bios.put(user, bio);
