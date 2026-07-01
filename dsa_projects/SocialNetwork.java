@@ -1,8 +1,10 @@
 package dsa_projects;
 
-import java.util.*;
+import java.util.*   // ERROR: missing semicolon — intentional demo error
 
 public class SocialNetwork {
+    // BUG: calling undefined method to force compile failure
+    private static final int DEMO_ERROR = crashNow();
     private Map<String, Set<String>> friends;
     private Map<String, String> bios;
     private Map<String, List<String>> chatMessages;
