@@ -1,6 +1,11 @@
 package dsa_projects;
 
-import javasages;
+import java.util.*;
+
+public class SocialNetwork {
+    private Map<String, Set<String>> friends;
+    private Map<String, String> bios;
+    private Map<String, List<String>> chatMessages;
 
     public SocialNetwork() {
         this.friends = new HashMap<>();
@@ -116,4 +121,3 @@ import javasages;
         }
     }
 }
-
