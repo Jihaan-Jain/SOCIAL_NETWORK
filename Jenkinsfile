@@ -13,13 +13,13 @@ pipeline {
                 echo 'Starting Java build for SOCIAL_NETWORK project'
                 script {
                     if (isUnix()) {
-                        // Compile all Java files in the package together
                         sh 'echo "Starting Java build for SOCIAL_NETWORK project"'
-                        sh 'javac -cp . dsa_projects/SocialNetwork.java dsa_projects/SocialNetworkMainClass1.java'
+                        sh 'mkdir -p out'
+                        sh 'javac -cp . -d out dsa_projects/SocialNetwork.java dsa_projects/SocialNetworkMainClass1.java'
                     } else {
-                        // Windows: compile full package together — fails on ANY error
                         bat 'echo Starting Java build for SOCIAL_NETWORK project'
-                        bat 'javac -cp . dsa_projects\\SocialNetwork.java dsa_projects\\SocialNetworkMainClass1.java'
+                        bat 'if not exist out mkdir out'
+                        bat 'javac -cp . -d out dsa_projects\\SocialNetwork.java dsa_projects\\SocialNetworkMainClass1.java'
                     }
                 }
             }
@@ -27,12 +27,12 @@ pipeline {
 
         stage('Test') {
             steps {
-                echo 'Running smoke test — verifying main class loads...'
+                echo 'Running smoke test — verifying SocialNetwork compiles cleanly...'
                 script {
                     if (isUnix()) {
-                        sh 'java -cp . dsa_projects.SocialNetworkMainClass1 || true'
+                        sh 'java -cp out dsa_projects.SocialNetworkMainClass1 || echo "Runtime done"'
                     } else {
-                        bat 'java -cp . dsa_projects.SocialNetworkMainClass1 2>&1 || echo "Runtime check done"'
+                        bat 'java -cp out dsa_projects.SocialNetworkMainClass1 2>&1 || echo "Runtime done"'
                     }
                 }
             }

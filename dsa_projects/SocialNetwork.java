@@ -1,6 +1,6 @@
 package dsa_projects;
 
-// import java.util.*;  // DEMO: commented out to trigger FAILURE
+import java.util.*;
 
 public class SocialNetwork {
     private Map<String, Set<String>> friends;
