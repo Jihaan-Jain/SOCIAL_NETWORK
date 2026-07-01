@@ -20,13 +20,13 @@ public class a {
         l2.setBounds(50,100,100,30);
         t2.setBounds(150,100,150,30);
 
-        b.setBounds(120,160,100,40)
+        b.setBounds(120,160,100,40);
 
         f.add(l1);
         f.add(t1);
         f.add(l2);
         f.add(t2);
-        f.add(b);
+        f.add(b)
 
         f.setSize(400,300);
         f.setLayout(null);
