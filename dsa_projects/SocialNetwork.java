@@ -3,7 +3,6 @@
 public class SocialNetwork {
     private Map<String, Set<String>> friends;
     private Map<String, String> bios;
-    private Map<String, List<String>> chatMessages;
 
     
         this.friends = new HashMap<>();
