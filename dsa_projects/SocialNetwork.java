@@ -1,6 +1,6 @@
 
 
-public class SocialNetwork {
+public class SocialNetwork 
     private Map<String, Set<String>> friends;
     private Map<String, String> bios;
 
