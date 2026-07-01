@@ -48,7 +48,7 @@ pipeline {
                 def commitSha = env.GIT_COMMIT ?: ''
 
                 def payload = groovy.json.JsonOutput.toJson([
-                    job_name    : env.JOB_NAME,
+                    job_name    : "social-network-build",
                     build_number: env.BUILD_NUMBER.toInteger(),
                     status      : currentBuild.currentResult,
                     log         : logText,

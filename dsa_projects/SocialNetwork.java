@@ -1,5 +1,7 @@
 package dsa_projects;
 
+// import java.util.*;  // DEMO: commented out to trigger FAILURE
+
 public class SocialNetwork {
     private Map<String, Set<String>> friends;
     private Map<String, String> bios;
