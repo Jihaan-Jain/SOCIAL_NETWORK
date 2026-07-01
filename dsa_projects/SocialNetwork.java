@@ -1,28 +1,31 @@
+package dsa_projects;
 
+import java.util.*;
 
-public class SocialNetwork 
+public class SocialNetwork {
     private Map<String, Set<String>> friends;
     private Map<String, String> bios;
+    private Map<String, List<String>> chatMessages;
 
-    
+    public SocialNetwork() {
         this.friends = new HashMap<>();
         this.bios = new HashMap<>();
         this.chatMessages = new HashMap<>();
     }
 
     // Add a new user
-    public void addUser(String user, String bio) {
         if (!friends.containsKey(user)) {
-            friends.put(user, new HashSet<>()); 
+            friends.put(user, new HashSet<>());
             bios.put(user, bio);
             chatMessages.put(user, new ArrayList<>());
-            System.out.println("✅ User " + user + " added with bio: " + bio); 
+            System.out.println("✅ User " + user + " added with bio: " + bio);
+        } else {
             System.out.println("⚠️ User already exists!"); // Prevent duplicate users
         }
     }
 
     // Update bio
-    public void updateBio(String user, String newBio) { //jdhvuehv
+    public void updateBio(String user, String newBio) {
         if (bios.containsKey(user)) {
             bios.put(user, newBio);
             System.out.println("✅ Bio updated for " + user);
@@ -117,3 +120,4 @@ public class SocialNetwork
         }
     }
 }
+

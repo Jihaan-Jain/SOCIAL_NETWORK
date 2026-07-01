@@ -13,11 +13,9 @@ pipeline {
                 echo 'Starting Java build for SOCIAL_NETWORK project'
                 script {
                     if (isUnix()) {
-                        sh 'echo "Starting Java build for SOCIAL_NETWORK project"'
                         sh 'mkdir -p out'
                         sh 'javac -cp . -d out dsa_projects/SocialNetwork.java dsa_projects/SocialNetworkMainClass1.java'
                     } else {
-                        bat 'echo Starting Java build for SOCIAL_NETWORK project'
                         bat 'if not exist out mkdir out'
                         bat 'javac -cp . -d out dsa_projects\\SocialNetwork.java dsa_projects\\SocialNetworkMainClass1.java'
                     }
@@ -27,7 +25,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                echo 'Running smoke test — verifying SocialNetwork compiles cleanly...'
+                echo 'Running smoke test — verifying SocialNetwork compiles and runs cleanly...'
                 script {
                     if (isUnix()) {
                         sh 'java -cp out dsa_projects.SocialNetworkMainClass1 || echo "Runtime done"'
@@ -42,13 +40,20 @@ pipeline {
     post {
         always {
             script {
-                def logText = currentBuild.rawBuild.getLog(1000).join("\n")
-                def repoUrl = env.GIT_URL ?: ''
+                // FIX: use rawBuild.getLog() — RunWrapper does not expose getLog(int) directly
+                def logText = ''
+                try {
+                    logText = currentBuild.rawBuild.getLog(2000).join("\n")
+                } catch (e) {
+                    logText = "Could not retrieve build log: ${e.message}"
+                }
+
+                def repoUrl    = env.GIT_URL    ?: ''
                 def branchName = env.GIT_BRANCH ?: ''
-                def commitSha = env.GIT_COMMIT ?: ''
+                def commitSha  = env.GIT_COMMIT ?: ''
 
                 def payload = groovy.json.JsonOutput.toJson([
-                    job_name    : "social-network-build",
+                    job_name    : env.JOB_NAME,
                     build_number: env.BUILD_NUMBER.toInteger(),
                     status      : currentBuild.currentResult,
                     log         : logText,
@@ -76,14 +81,13 @@ pipeline {
                         echo "TRACE: could not parse ingest response"
                     }
                 } else {
-                    // Windows: POST with PowerShell using Invoke-WebRequest so we get
-                    // raw JSON text (Invoke-RestMethod returns a PS object, not JSON)
+                    // Windows: POST with PowerShell — Invoke-WebRequest returns raw JSON text
                     writeFile file: 'trace_payload.json', text: payload
                     def response = bat(
                         script: 'powershell -Command "(Invoke-WebRequest -Uri \'http://localhost:8000/logs/jenkins\' -Method Post -ContentType \'application/json\' -InFile \'trace_payload.json\').Content"',
                         returnStdout: true
                     ).trim()
-                    // bat() output includes the echoed command line; take the last non-empty line
+                    // bat() echoes the command line; take the last non-empty line (the actual JSON)
                     def jsonLine = response.readLines().findAll { it.trim() }.last()
                     try {
                         def parsed = new groovy.json.JsonSlurper().parseText(jsonLine)
@@ -96,7 +100,6 @@ pipeline {
 
                 // ── Step 2: Poll TRACE for ML result, set build description ───
                 if (traceLogId) {
-                    // Wait up to 30s for ML classification to complete
                     def traceSummary = 'TRACE | Classifying...'
                     def attempts = 0
                     while (attempts < 6) {
@@ -114,14 +117,12 @@ pipeline {
                                     returnStdout: true
                                 ).trim()
                             }
-                            // Stop polling once classified (no longer 'Classifying...')
                             if (!traceSummary.contains('Classifying')) break
                         } catch (e) {
                             echo "TRACE: summary poll attempt ${attempts} failed"
                         }
                     }
 
-                    // Write ML classification back to Jenkins build description
                     currentBuild.description = traceSummary
                     echo "TRACE result: ${traceSummary}"
                 }
@@ -129,3 +130,4 @@ pipeline {
         }
     }
 }
+
