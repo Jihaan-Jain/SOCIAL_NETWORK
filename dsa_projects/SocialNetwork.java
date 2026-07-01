@@ -1,6 +1,6 @@
 package dsa_projects;
 
-import java.util.*;
+// import java.util.*;  // INTENTIONAL ERROR: triggers javac FAILURE in TRACE
 
 public class SocialNetwork {
     private Map<String, Set<String>> friends;
