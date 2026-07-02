@@ -1,6 +1,6 @@
 package dsa_projects;
 
-import java.util.*   // INTENTIONAL ERROR: missing semicolon for TRACE demo
+import java.util.*;
 
 public class SocialNetwork {
     private Map<String, Set<String>> friends;
