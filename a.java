@@ -1,15 +1,17 @@
+import javax.swing.*;
+import java.util.*
 
 public class a {
 
     public static void main(String[] args) {
 
-        JFrame f = new JFrame("Login Form"
+        JFrame f = new JFrame("Login Form");
 
-        JLabel l1 = new JLabel("Username:"
+        JLabel l1 = new JLabel("Username:");
         JLabel l2 = new JLabel("Password:"); //sfhliuefhwusfhw
 
         JTextField t1 = new JTextField();
-        JPasswordField t2 = new JPasswordField(  //fjheiuf
+        JPasswordField t2 = new JPasswordField();  //fjheiuf
  
         JButton b = new JButton("Login");
 
