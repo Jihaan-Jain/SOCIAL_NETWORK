@@ -8,7 +8,7 @@ public class SocialNetwork {
     private Map<String, List<String>> chatMessages;
 
     public SocialNetwork() {
-        this.friends = new HashMap<>();
+        this.friends = new HashMap<>
         this.bios = new HashMap<>();
         this.chatMessages = new HashMap<>();
     }
