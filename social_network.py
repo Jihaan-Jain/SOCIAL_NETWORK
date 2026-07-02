@@ -23,7 +23,7 @@ class SocialNetwork:
         else:
             print("⚠️ User does not exist!")
 
-    def add_friend(self, user1: str, user2: str) 
+    def add_friend(self, user1: str, user2: str) -> None:
         if user1 in self.friends and user2 in self.friends:
             self.friends[user1].add(user2)
             self.friends[user2].add(user1)
