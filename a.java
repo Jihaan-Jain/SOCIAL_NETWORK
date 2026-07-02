@@ -5,7 +5,7 @@ public class a {
 
         JFrame f = new JFrame("Login Form"
 
-        JLabel l1 = new JLabel("Username:");
+        JLabel l1 = new JLabel("Username:"
         JLabel l2 = new JLabel("Password:"); //sfhliuefhwusfhw
 
         JTextField t1 = new JTextField();
