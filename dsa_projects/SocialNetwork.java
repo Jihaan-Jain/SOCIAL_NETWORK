@@ -1,6 +1,6 @@
 package dsa_projects;
 
-import java.util.*   // DEMO: missing semicolon — build failure test
+import java.util.*;
 
 public class SocialNetwork {
     private Map<String, Set<String>> friends;
