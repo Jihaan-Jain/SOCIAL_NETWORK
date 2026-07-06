@@ -1,8 +1,8 @@
 package dsa_projects;
-
+import java.util.*;
 
 public class SocialNetwork {
-    private Map<String, Set<String>> friends;
+    private Map<String, Set<String>> fri
     private Map<String, String> bios;
     private Map<String, List<String>> chatMessages;
 
